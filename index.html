@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Accelerometer Watch</title>
+        <script src="scripts/jquery-1.6.4.js" type="text/javascript"></script>
+        <script src="scripts/jquery.mobile-1.0.1.min.js" type="text/javascript"></script>
+        <script src="scripts/cordova.js" type="text/javascript"></script>
+        <link rel="Stylesheet" href="style/jquery.mobile-1.0.1.min.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <script type="text/javascript">
+                var watchAcc = null;
+                
+                document.addEventListener("deviceready", onDeviceReady, false);
+                
+                function onDeviceReady() {
+                    var options = { frequency: 100 };
+
+                    watchAcc = navigator.accelerometer.watchAcceleration(accelerometerSuccess, accelerometerError, options);
+                }
+		
+                function accelerometerSuccess(acceleration) {
+                    var str = 'Acceleration X: ' + acceleration.x + '<br />' +
+                              'Acceleration Y: ' + acceleration.y + '<br />' +
+                              'Acceleration Z: ' + acceleration.z + '<br />';
+                    
+                    $('div.display-field').html(str); 
+                }
+
+                function accelerometerError() {
+                    alert('Acceleromter Error!');
+                }
+    </script>
+  </head>
+  <body>
+    <div class='display-field'></div>
+  </body>
+</html>
